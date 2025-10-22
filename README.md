@@ -58,6 +58,7 @@ JarvisAndroid/android/app/src/main/res/raw/
 -   문제가 생기면 `android/gradlew clean` 후 재시도하세요.
 
 ##폴더경로
+
 A터미널
 
 1. cd "D:\workspace_2\my-javis\JarvisAndroid"
