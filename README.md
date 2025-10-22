@@ -3,6 +3,46 @@
 이 압축파일은 **React Native 프로젝트를 자동 생성하고, 웨이크워드/STT/TTS/SSE 연동**을 덮어씌우는 **오버레이**입니다.
 iOS는 사용하지 않습니다(폴더는 생성되지만 무시).
 
+## 폴더구조
+
+JarvisAndroid/
+├─ android/
+│ └─ app/src/main/
+│ ├─ AndroidManifest.xml # 권한/usesCleartextTraffic 추가한 곳
+│ └─ res/xml/network_security_config.xml
+├─ ios/ # iOS는 안 써도 기본 생성됨
+├─ web/ # 웹 프리뷰 전용
+│ ├─ index.html
+│ ├─ webpack.config.js
+│ └─ shims/
+│ ├─ empty.js # 네이티브 모듈 목 처리
+│ └─ tts-web.js # 브라우저 SpeechSynthesis 대체
+├─ src/
+│ ├─ App.js
+│ ├─ components/ # 공용 UI 컴포넌트(옵션)
+│ ├─ screens/ # 화면 단위(옵션)
+│ ├─ utils/
+│ │ └─ sentenceSplit.js
+│ ├─ services/
+│ │ ├─ sseClient.ts # SSE 연결/이벤트 처리(옵션)
+│ │ ├─ wakeword.js
+│ │ ├─ stt.ts # STT 래퍼(옵션; 웹에선 목)
+│ │ └─ tts.ts # TTS 래퍼(장치/웹 분기)
+│ ├─ hooks/
+│ │ └─ useVoiceAgent.ts # 스트림 훅(옵션)
+│ └─ config/
+│ └─ env.js
+├─ assets/ # 아이콘/사운드 등(옵션)
+├─ App.tsx # 기본 화면(입력→SSE→문장단위 TTS)
+├─ index.js # RN 엔트리(기본)
+├─ index.web.js # 웹 엔트리
+├─ .env # BACKEND_SSE_URL=...
+├─ package.json
+├─ babel.config.js
+├─ metro.config.js
+├─ react-native.config.js # 필요 시(폰트/네이티브 설정 등)
+└─ tsconfig.json # TS 사용 시
+
 ## 준비물
 
 -   Node.js 18.x 또는 20.x
@@ -69,3 +109,7 @@ B터미널
 
 1. cd "D:\workspace_2\my-javis\JarvisAndroid"
 2. npm run android
+
+##작업전 웹화면체크
+1.npm run web
+2.localhost:8080
